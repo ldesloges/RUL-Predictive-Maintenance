@@ -4,5 +4,4 @@ matplotlib
 scikit-learn
 streamlit
 joblib
-altair
-vega_datasets
+altair==5.2.0
