@@ -1,47 +1,24 @@
 import streamlit as st
 import pandas as pd
 import joblib
-import matplotlib.pyplot as plt
 import os
-# On importe tes fonctions de préparation directement depuis ton fichier RUL.py
+# On importe seulement les fonctions
 from RUL import data_test_prep 
 
-st.set_page_config(page_title="Dashboard Maintenance NASA", layout="wide")
+st.set_page_config(page_title="NASA Engine Dashboard", layout="wide")
 
 @st.cache_resource
 def load_assets():
-    # Charge les fichiers générés par RUL.py
-    model = joblib.load('model_RUL.pkl')
-    scaler = joblib.load('scaler.pkl')
-    features = joblib.load('features_list.pkl')
-    return model, scaler, features
+    # On vérifie si les fichiers existent sur GitHub
+    if os.path.exists('model_RUL.pkl'):
+        return joblib.load('model_RUL.pkl'), joblib.load('scaler.pkl'), joblib.load('features_list.pkl')
+    return None, None, None
 
-st.title("🛠️ Surveillance de Flotte en Temps Réel")
+model, scaler, features = load_assets()
 
-try:
-    model, Myscaler, train_columns = load_assets()
-
-    # Sidebar : Sélection du moteur
-    df_raw = pd.read_csv('data/test_FD001.txt', sep='\s+', header=None)
-    engine_id = st.sidebar.selectbox("Choisir l'ID du moteur", df_raw[0].unique())
-
-    if st.sidebar.button("Lancer le Diagnostic"):
-        # Utilisation de ta fonction de RUL.py
-        data_test = data_test_prep('data/test_FD001.txt', Myscaler)
-        
-        # Données du moteur choisi
-        engine_data = data_test[data_test['ID_Moteur'] == engine_id]
-        X_input = engine_data[train_columns].tail(1)
-        
-        prediction = model.predict(X_input)[0]
-        
-        # Affichage
-        st.metric("RUL Estimé (Cycles restants)", f"{int(prediction)}")
-        
-        if prediction < 30:
-            st.error("🚨 ALERTE : Maintenance immédiate conseillée.")
-        else:
-            st.success("✅ État du moteur : Stable.")
-
-except FileNotFoundError:
-    st.error("Fichiers .pkl introuvables. Lancez 'python RUL.py' sur votre Mac d'abord.")
+if model is None:
+    st.error("⚠️ Les fichiers .pkl sont manquants sur GitHub.")
+    st.info("Lance 'python RUL.py' sur ton Mac, puis fais un 'make push'.")
+else:
+    st.title("🛠️ Surveillance de Flotte en Temps Réel")
+    # ... la suite de ton code dashboard ...
