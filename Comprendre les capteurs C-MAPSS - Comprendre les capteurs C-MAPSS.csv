@@ -1,0 +1,22 @@
+Capteur,Symbole,Description Physique,Unité
+s_1,T2,Température à l'entrée du ventilateur,°R
+s_2,T24,Température à la sortie du compresseur BP,°R
+s_3,T30,Température à la sortie du compresseur HP,°R
+s_4,T50,Température à la sortie de la turbine HP,°R
+s_5,P2,Pression à l'entrée du ventilateur,psia
+s_6,P15,Pression statique dans le conduit de dérivation,psia
+s_7,P30,Pression à la sortie du compresseur HP,psia
+s_8,Nf,Vitesse physique du ventilateur,rpm
+s_9,Nc,Vitesse physique du noyau,rpm
+s_10,epr,Rapport de pression du moteur (P50/P2),--
+s_11,Ps30,Pression statique à la sortie du compresseur HP,psia
+s_12,phi,Rapport débit carburant / Ps30,pps/psia
+s_13,NRf,Vitesse corrigée du ventilateur,rpm
+s_14,NRc,Vitesse corrigée du noyau,rpm
+s_15,BPR,Rapport de dilution (Bypass Ratio),--
+s_16,far,Rapport air-carburant,--
+s_17,htBleed,Enthalpie de prélèvement,--
+s_18,Nf_dmd,Vitesse demandée du ventilateur,rpm
+s_19,PCNf_dmd,Vitesse demandée du ventilateur en %,%
+s_20,W31,Débit de purge HPT,lbm/s
+s_21,W32,Débit de purge LPT,lbm/s
