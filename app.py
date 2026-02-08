@@ -2,7 +2,8 @@ import streamlit as st
 import pandas as pd
 import joblib
 import matplotlib.pyplot as plt
-# Import des fonctions depuis RUL.py
+import os
+# On importe tes fonctions de préparation directement depuis ton fichier RUL.py
 from RUL import data_test_prep 
 
 st.set_page_config(page_title="Dashboard Maintenance NASA", layout="wide")

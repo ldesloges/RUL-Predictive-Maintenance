@@ -7,6 +7,7 @@ from sklearn.metrics import mean_absolute_error, r2_score
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error
+import joblib
 from sklearn.metrics import r2_score
 
 def make_data_smoother(df,window_size):
@@ -96,6 +97,10 @@ def data_test_prep(fichier,scaler):
     return data_smooth
 
 if __name__ == "__main__":
+    joblib.dump(model, 'model_RUL.pkl')
+    joblib.dump(Myscaler, 'scaler.pkl')
+    joblib.dump(columns, 'features_list.pkl')
+    print("Fichiers .pkl créés avec succès !")
     #Train
     data_test=data_test_prep('data/test_FD001.txt',Myscaler)
     df_RUL=pd.read_csv('data/RUL_FD001.txt',header=None)
