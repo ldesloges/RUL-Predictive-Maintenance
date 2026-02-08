@@ -170,4 +170,25 @@ joblib.dump(model, 'model_RUL.pkl')
 joblib.dump(Myscaler, 'scaler.pkl')
 joblib.dump(columns_to_use, 'features_list.pkl')
 
+# --- LES FONCTIONS CI-DESSUS RESTENT INCHANGÉES ---
+
+if __name__ == "__main__":
+    # Ce code ne s'exécutera QUE sur ton Mac
+    print("🚀 Entraînement local en cours...")
+    data_train, Myscaler = data_train_prep('data/train_FD001.txt')
+    columns = [col for col in data_train if 'Capteur' in col]
+    
+    X = data_train[columns]
+    y = data_train['RUL']
+    
+    model = RandomForestRegressor(n_estimators=100, n_jobs=-1, random_state=42)
+    model.fit(X, y)
+    
+    # SAUVEGARDE DES FICHIERS
+    import joblib
+    joblib.dump(model, 'model_RUL.pkl')
+    joblib.dump(Myscaler, 'scaler.pkl')
+    joblib.dump(columns, 'features_list.pkl')
+    print("✅ Intelligence sauvegardée ! Fais ton 'make push' maintenant.")
+
 
