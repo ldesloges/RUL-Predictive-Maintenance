@@ -98,16 +98,13 @@ def data_test_prep(fichier,scaler):
 
 
 if __name__ == "__main__":
-    # Ce code ne s'exécute QUE quand tu lances RUL.py manuellement
-    print("🚀 Entraînement sur ton Mac...")
     data_train, Myscaler = data_train_prep('data/train_FD001.txt')
     cols_train = [col for col in data_train if 'Capteur' in col]
     
     model = RandomForestRegressor(n_estimators=100, n_jobs=-1, random_state=42)
     model.fit(data_train[cols_train], data_train['RUL'])
     
-    # On sauvegarde les cerveaux
+    # On sauvegarde 
     joblib.dump(model, 'model_RUL.pkl')
     joblib.dump(Myscaler, 'scaler.pkl')
     joblib.dump(cols_train, 'features_list.pkl')
-    print("✅ Fichiers .pkl créés !")
